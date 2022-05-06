@@ -62,6 +62,7 @@ class Fighter extends Sprite {
     framesMax = 1,
     framesHold,
     offset = { x: 0, y: 0 },
+    sprites,
   }) {
     super({ position, imageSrc, scale, framesMax, framesHold, offset });
 
@@ -81,6 +82,12 @@ class Fighter extends Sprite {
     this.color = color;
     this.isAttacking;
     this.health = 100;
+    this.sprites = sprites;
+
+    for (const sprite in this.sprites) {
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
+    }
   }
 
   // draw() {
