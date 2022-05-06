@@ -40,6 +40,14 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
+  imageSrc: "./assets/samuraiMack/Idle.png",
+  framesMax: 8,
+  scale: 2.5,
+  framesHold: 5,
+  offset: {
+    x: 215,
+    y: 157,
+  },
 });
 
 const enemy = new Fighter({
@@ -55,6 +63,14 @@ const enemy = new Fighter({
   offset: {
     x: -50,
     y: 0,
+  },
+  imageSrc: "./assets/kenji/Idle.png",
+  framesMax: 4,
+  scale: 2.5,
+  framesHold: 10,
+  offset: {
+    x: -350,
+    y: 170,
   },
 });
 
