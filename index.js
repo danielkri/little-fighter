@@ -65,6 +65,10 @@ const player = new Fighter({
       imageSrc: "./assets/samuraiMack/Fall.png",
       framesMax: 2,
     },
+    attack1: {
+      imageSrc: "./assets/samuraiMack/Attack1.png",
+      framesMax: 6,
+    },
   },
 });
 
@@ -106,6 +110,10 @@ const enemy = new Fighter({
     fall: {
       imageSrc: "./assets/kenji/Fall.png",
       framesMax: 2,
+    },
+    attack1: {
+      imageSrc: "./assets/kenji/Attack1.png",
+      framesMax: 6,
     },
   },
 });
