@@ -36,10 +36,6 @@ const player = new Fighter({
     x: 0,
     y: 10,
   },
-  offset: {
-    x: 0,
-    y: 0,
-  },
   imageSrc: "./assets/samuraiMack/Idle.png",
   framesMax: 8,
   scale: 2.5,
@@ -47,6 +43,14 @@ const player = new Fighter({
   offset: {
     x: 215,
     y: 157,
+  },
+  attackBox: {
+    offset: {
+      x: 100,
+      y: 50,
+    },
+    width: 160,
+    height: 50,
   },
   sprites: {
     idle: {
@@ -74,7 +78,7 @@ const player = new Fighter({
 
 const enemy = new Fighter({
   position: {
-    x: 400,
+    x: 800,
     y: 100,
   },
   velocity: {
@@ -82,17 +86,21 @@ const enemy = new Fighter({
     y: 10,
   },
   color: "blue",
-  offset: {
-    x: -50,
-    y: 0,
-  },
   imageSrc: "./assets/kenji/Idle.png",
   framesMax: 4,
   scale: 2.5,
   framesHold: 10,
   offset: {
-    x: -350,
+    x: 210,
     y: 170,
+  },
+  attackBox: {
+    offset: {
+      x: -165,
+      y: 50,
+    },
+    width: 165,
+    height: 50,
   },
   sprites: {
     idle: {
@@ -113,7 +121,7 @@ const enemy = new Fighter({
     },
     attack1: {
       imageSrc: "./assets/kenji/Attack1.png",
-      framesMax: 6,
+      framesMax: 4,
     },
   },
 });
@@ -194,23 +202,35 @@ function animate() {
       rectangle1: player,
       rectangle2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking &&
+    player.framesCurrent === 4
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
   }
 
+  //if player misses
+  if (player.isAttacking && player.framesCurrent === 4) {
+    player.isAttacking = false;
+  }
+
   if (
     rectangularCollision({
-      rectangle2: player,
       rectangle1: enemy,
+      rectangle2: player,
     }) &&
-    enemy.isAttacking
+    enemy.isAttacking &&
+    enemy.framesCurrent === 2
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
+  }
+
+  //if enemy misses
+  if (enemy.isAttacking && enemy.framesCurrent === 2) {
+    enemy.isAttacking = false;
   }
 
   //end game based on health
